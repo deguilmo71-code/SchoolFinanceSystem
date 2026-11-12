@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Finance System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOGIN PAGE -->
+    <section id="login-page" class="login-container">
+        <div class="login-box">
+            <div class="login-icon">🎓</div>
+
+            <h1>School Finance</h1>
+            <p class="login-subtitle">Management System</p>
+
+            <form id="login-form">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit" class="login-button">
+                    Login
+                </button>
+
+                <p id="login-message" role="alert"></p>
+            </form>
+
+            <p class="login-footer">
+                Authorized Personnel Only
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="app" hidden>
+        <aside class="sidebar">
+            <h2>🎓 School Finance</h2>
+            <p class="subtitle">Management System</p>
+
+            <nav>
+                <a href="#" class="active" data-page="Dashboard">
+                    📊 Dashboard
+                </a>
+
+                <a href="#" data-page="Transactions">
+                    💳 Transactions
+                </a>
+
+                <a href="#" data-page="Student Fees">
+                    🎓 Student Fees
+                </a>
+
+                <a href="#" data-page="Reports">
+                    📈 Reports
+                </a>
+            </nav>
+
+            <div class="admin">
+                <strong>👤 <span id="logged-user"></span></strong>
+                <p>Finance Officer</p>
+                <button id="logout-button" class="logout-button">
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h2 id="page-title">Dashboard</h2>
+                    <p>School Finance Management System</p>
+                </div>
+
+                <span id="today"></span>
+            </header>
+
+            <!-- DASHBOARD -->
+            <section id="dashboard-page" class="page">
+                <h3>Welcome back, <span id="welcome-user"></span>!</h3>
+                <p class="description">
+                    Here's an overview of your school's finances.
+                </p>
+
+                <div class="cards">
+                    <div class="card">
+                        <p>Total Collected</p>
+                        <h2 id="total-collected">₱ 0.00</h2>
+                        <span class="green">Recorded payments</span>
+                    </div>
+
+                    <div class="card">
+                        <p>Pending Payments</p>
+                        <h2 id="pending-payments">₱ 0.00</h2>
+                        <span class="orange">Awaiting payment</span>
+                    </div>
+
+                    <div class="card">
+                        <p>Total Students</p>
+                        <h2>142</h2>
+                        <span class="blue">Registered students</span>
+                    </div>
+
+                    <div class="card">
+                        <p>System Status</p>
+                        <h2>Active</h2>
+                        <span class="green">Finance dashboard</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Recent Transactions</h3>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Student</th>
+                                    <th>Payment Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="transaction-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRANSACTIONS -->
+            <section id="transactions-page" class="page" hidden>
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Payment Transactions</h3>
+
+                        <button id="add-transaction-button">
+                            + Add Transaction
+                        </button>
+                    </div>
+
+                    <form id="payment-form" hidden>
+                        <label for="student-name">Student Name</label>
+                        <input id="student-name" required
+                               placeholder="Enter student name">
+
+                        <label for="payment-type">Payment Type</label>
+                        <select id="payment-type">
+                            <option>Tuition Fee</option>
+                            <option>Miscellaneous</option>
+                            <option>Library Fee</option>
+                            <option>Registration</option>
+                        </select>
+
+                        <label for="payment-amount">Amount (₱)</label>
+                        <input id="payment-amount" type="number"
+                               min="0.01" step="0.01" required
+                               placeholder="Enter amount">
+
+                        <button type="submit">Save Transaction</button>
+                    </form>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Student</th>
+                                    <th>Payment Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-transactions"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STUDENT FEES -->
+            <section id="student-fees-page" class="page" hidden>
+                <div class="panel">
+                    <h3>Student Fee Records</h3>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Student Name</th>
+                                    <th>Grade</th>
+                                    <th>Total Due</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>STU001</td>
+                                    <td>Juan Dela Cruz</td>
+                                    <td>Grade 12</td>
+                                    <td>₱ 5,000.00</td>
+                                    <td>
+                                        <!-- Fixed typo from <spanish> and </tdp> -->
+                                        <span class="badge pending">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>STU002</td>
+                                    <td>Maria Santos</td>
+                                    <td>Grade 11</td>
+                                    <td>₱ 0.00</td>
+                                    <td>
+                                        <span class="badge paid">Paid</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- REPORTS -->
+            <section id="reports-page" class="page" hidden>
+                <div class="cards">
+                    <div class="card">
+                        <p>Total Income</p>
+                        <h2 id="report-income">₱ 0.00</h2>
+                    </div>
+
+                    <div class="card">
+                        <p>Total Expenses</p>
+                        <h2>₱ 45,250.00</h2>
+                    </div>
+
+                    <div class="card">
+                        <p>Net Balance</p>
+                        <h2 id="report-balance">₱ 0.00</h2>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Financial Summary</h3>
+                    <p>Net Balance = Total Income − Total Expenses</p>
+                    <button onclick="window.print()">Print Report</button>
+                </div>
+            </section>
+
+            <footer>
+                © 2026 School Finance System
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

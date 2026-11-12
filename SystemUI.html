@@ -1,0 +1,3478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance management · Login & Sign Up</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f5f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .main-container {
+      max-width: 1400px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 36px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========== AUTH SCREEN ========== */
+    .auth-screen {
+      display: flex;
+      min-height: 650px;
+    }
+
+    .auth-left {
+      flex: 1;
+      background: linear-gradient(145deg, #0b1e3a, #1e3c72);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-left::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50%;
+      bottom: -100px;
+      right: -100px;
+    }
+
+    .auth-left h1 {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .auth-left p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+      max-width: 380px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .auth-left .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .auth-left .brand-icon {
+      background: rgba(255, 255, 255, 0.15);
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      backdrop-filter: blur(6px);
+    }
+
+    .auth-left .brand-text {
+      font-weight: 700;
+      font-size: 22px;
+    }
+
+    .auth-left .brand-text span {
+      color: #7fb0ff;
+    }
+
+    .auth-features {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .auth-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .auth-feature i {
+      color: #7fb0ff;
+      font-size: 16px;
+      width: 20px;
+    }
+
+    .auth-right {
+      flex: 1;
+      padding: 40px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ffffff;
+      overflow-y: auto;
+      max-height: 700px;
+    }
+
+    .auth-right h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #0b1e3a;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .auth-right .subtitle {
+      color: #7b8a9e;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: #f0f4fa;
+      border-radius: 14px;
+      padding: 5px;
+      margin-bottom: 24px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 11px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      color: #4d5c6f;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .auth-tab.active {
+      background: #ffffff;
+      color: #1e3c72;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .auth-panel {
+      display: none;
+    }
+
+    .auth-panel.active {
+      display: block;
+    }
+
+    .role-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .role-option {
+      flex: 1;
+      padding: 14px 10px;
+      border: 2px solid #eef2f8;
+      border-radius: 14px;
+      background: #fafcff;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .role-option i {
+      font-size: 20px;
+      color: #7b8a9e;
+      display: block;
+      margin-bottom: 6px;
+      transition: color 0.2s;
+    }
+
+    .role-option span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4d5c6f;
+    }
+
+    .role-option.selected {
+      border-color: #2a6df4;
+      background: #f0f7ff;
+    }
+
+    .role-option.selected i {
+      color: #2a6df4;
+    }
+
+    .role-option.selected span {
+      color: #1e3c72;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #4d5c6f;
+      margin-bottom: 7px;
+    }
+
+    .form-group .input-wrapper {
+      position: relative;
+    }
+
+    .form-group .input-wrapper i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a0aec0;
+      font-size: 15px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 13px 16px 13px 46px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 13px;
+      font-size: 14px;
+      color: #1e2a3a;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      background: #fafcff;
+    }
+
+    .form-group input:focus {
+      border-color: #2a6df4;
+      box-shadow: 0 0 0 4px rgba(42, 109, 244, 0.1);
+      background: #ffffff;
+    }
+
+    .form-group input::placeholder {
+      color: #b0bccb;
+    }
+
+    .login-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .login-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #4d5c6f;
+      cursor: pointer;
+    }
+
+    .login-options a {
+      color: #2a6df4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .auth-btn {
+      width: 100%;
+      padding: 14px;
+      background: #1e3c72;
+      border: none;
+      border-radius: 13px;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .auth-btn:hover {
+      background: #14305e;
+    }
+
+    .auth-btn:active {
+      transform: scale(0.99);
+    }
+
+    .auth-error, .auth-success {
+      padding: 11px 16px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-error {
+      background: #fee9e7;
+      color: #c0392b;
+    }
+
+    .auth-success {
+      background: #e9f7ef;
+      color: #1e8e5c;
+    }
+
+    .auth-error i, .auth-success i {
+      font-size: 15px;
+    }
+
+    .demo-hint {
+      margin-top: 18px;
+      background: #f8fbff;
+      border: 1px dashed #d0ddea;
+      border-radius: 13px;
+      padding: 12px 16px;
+      font-size: 12.5px;
+      color: #4d5c6f;
+      line-height: 1.7;
+    }
+
+    .demo-hint strong {
+      color: #1e3c72;
+    }
+
+    .demo-hint code {
+      background: #e9f0fa;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: #1e3c72;
+      font-size: 11.5px;
+    }
+
+    .signup-footer {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 13px;
+      color: #7b8a9e;
+    }
+
+    .signup-footer a {
+      color: #2a6df4;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .signup-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .info-note {
+      background: #f8fbff;
+      border: 1px solid #d9e6ff;
+      border-radius: 13px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #4d5c6f;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .info-note i {
+      color: #2a6df4;
+      font-size: 16px;
+      margin-top: 1px;
+    }
+
+    /* ========== APP WRAPPER ========== */
+    .app-wrapper {
+      display: none;
+      flex-direction: column;
+    }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 28px;
+      background: #ffffff;
+      border-bottom: 1px solid #e9edf4;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      background: #1e3c72;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 20px;
+      color: #0b1e3a;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text span {
+      color: #2a6df4;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .role-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      background: #f0f7ff;
+      color: #1e3c72;
+    }
+
+    .role-badge i {
+      font-size: 14px;
+    }
+
+    .notification-badge {
+      background: #f0f4fa;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2a6df4;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .avatar {
+      background: #2a6df4;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1.5px solid #e2e8f0;
+      color: #4d5c6f;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: #fee9e7;
+      border-color: #f5b7b1;
+      color: #c0392b;
+    }
+
+    .dashboard-container {
+      padding: 28px 30px 30px 30px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0b1e3a;
+      margin-bottom: 20px;
+      letter-spacing: -0.2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #2a6df4;
+      text-decoration: none;
+    }
+
+    .student-dashboard {
+      display: block;
+    }
+
+    .finance-dashboard {
+      display: none;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 20px 18px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.02);
+      border: 1px solid #eef2f8;
+      transition: transform 0.15s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      color: #7b8a9e;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .stat-icon {
+      font-size: 20px;
+      color: #2a6df4;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #0b1e3a;
+      margin-bottom: 4px;
+    }
+
+    .stat-sub {
+      font-size: 13px;
+      color: #7b8a9e;
+    }
+
+    .stat-sub i {
+      color: #22b573;
+      margin-right: 4px;
+    }
+
+    .progress-wrapper {
+      margin-top: 10px;
+      height: 6px;
+      background: #e9edf4;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #2a6df4;
+      border-radius: 10px;
+      width: 0%;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .panel {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 22px 22px 18px;
+      border: 1px solid #eef2f8;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.02);
+    }
+
+    .transaction-list {
+      list-style: none;
+      margin-top: 6px;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+
+    .transaction-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f4fa;
+    }
+
+    .transaction-item:last-child {
+      border-bottom: none;
+    }
+
+    .tx-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .tx-icon {
+      width: 42px;
+      height: 42px;
+      background: #f0f7ff;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2a6df4;
+      font-size: 18px;
+    }
+
+    .tx-info h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0b1e3a;
+    }
+
+    .tx-info p {
+      font-size: 13px;
+      color: #7b8a9e;
+      margin-top: 2px;
+    }
+
+    .tx-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tx-amount {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .tx-amount.debit {
+      color: #e74c3c;
+    }
+
+    .tx-amount.credit {
+      color: #22b573;
+    }
+
+    .receipt-btn {
+      background: #f0f7ff;
+      border: 1px solid #d9e6ff;
+      color: #2a6df4;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .receipt-btn:hover {
+      background: #e1efff;
+      border-color: #2a6df4;
+    }
+
+    .payment-due-card {
+      background: linear-gradient(145deg, #f8fbff, #f0f6fe);
+      border-radius: 22px;
+      padding: 22px;
+      margin-top: 8px;
+      border: 1px solid #d9e6ff;
+    }
+
+    .due-amount {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0b1e3a;
+      margin: 10px 0 4px;
+    }
+
+    .due-label {
+      color: #7b8a9e;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: #1e3c72;
+      border: none;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 15px;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s;
+      margin-top: 20px;
+    }
+
+    .btn-primary:hover {
+      background: #14305e;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #d0ddea;
+      color: #1e3c72;
+      padding: 12px 18px;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 14px;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.15s;
+      margin-top: 12px;
+    }
+
+    .btn-outline i {
+      font-size: 15px;
+    }
+
+    .btn-outline:hover {
+      background: #f5f9ff;
+      border-color: #2a6df4;
+    }
+
+    .finance-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .finance-stat-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 20px 18px;
+      border: 1px solid #eef2f8;
+    }
+
+    .finance-stat-card .stat-value {
+      font-size: 26px;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #e9f7ef;
+      color: #1e8e5c;
+      font-weight: 600;
+    }
+
+    .badge.warning {
+      background: #fff3e0;
+      color: #b85e00;
+    }
+
+    .badge.info {
+      background: #e8f0fe;
+      color: #1e3c72;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 14px 8px 10px 8px;
+      font-weight: 600;
+      color: #7b8a9e;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #eef2f8;
+    }
+
+    td {
+      padding: 16px 8px;
+      border-bottom: 1px solid #f4f7fd;
+      color: #1e2a3a;
+      font-weight: 500;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .status {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 30px;
+      display: inline-block;
+    }
+
+    .status.paid {
+      background: #e9f7ef;
+      color: #1e8e5c;
+    }
+
+    .status.pending {
+      background: #fff3e0;
+      color: #b85e00;
+    }
+
+    .status.overdue {
+      background: #fee9e7;
+      color: #c0392b;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: #2a6df4;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      background: #f0f7ff;
+      transition: background 0.2s;
+    }
+
+    .action-btn:hover {
+      background: #e1efff;
+    }
+
+    .action-btn.edit {
+      background: #f0f7ff;
+      color: #2a6df4;
+    }
+
+    .action-btn.save {
+      background: #e9f7ef;
+      color: #1e8e5c;
+    }
+
+    .action-btn.cancel {
+      background: #fee9e7;
+      color: #c0392b;
+    }
+
+    .management-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: #f0f4fa;
+      padding: 5px;
+      border-radius: 14px;
+      width: fit-content;
+    }
+
+    .mgmt-tab {
+      padding: 10px 20px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      color: #4d5c6f;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mgmt-tab.active {
+      background: #ffffff;
+      color: #1e3c72;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .mgmt-panel {
+      display: none;
+    }
+
+    .mgmt-panel.active {
+      display: block;
+    }
+
+    .summary-strip {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .summary-chip {
+      background: #f8fbff;
+      border: 1px solid #eef2f8;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-size: 13px;
+      color: #4d5c6f;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .summary-chip strong {
+      color: #0b1e3a;
+      font-size: 15px;
+    }
+
+    .summary-chip i {
+      color: #2a6df4;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: #7b8a9e;
+    }
+
+    .empty-state i {
+      font-size: 40px;
+      color: #cbd5e0;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    .account-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mini-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #2a6df4;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .mini-avatar.finance {
+      background: #1e3c72;
+    }
+
+    .account-name-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0b1e3a;
+    }
+
+    .account-name-info p {
+      font-size: 12px;
+      color: #7b8a9e;
+      margin-top: 1px;
+    }
+
+    .inline-input {
+      width: 110px;
+      padding: 7px 10px;
+      border: 1.5px solid #2a6df4;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e2a3a;
+      outline: none;
+      background: #ffffff;
+    }
+
+    .inline-input:focus {
+      box-shadow: 0 0 0 3px rgba(42, 109, 244, 0.15);
+    }
+
+    .inline-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: #4d5c6f;
+      user-select: none;
+    }
+
+    .inline-toggle .toggle-switch {
+      width: 40px;
+      height: 22px;
+      background: #cbd5e0;
+      border-radius: 20px;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .inline-toggle .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    .inline-toggle.active .toggle-switch {
+      background: #2a6df4;
+    }
+
+    .inline-toggle.active .toggle-switch::after {
+      transform: translateX(18px);
+    }
+
+    .inline-toggle.active {
+      color: #2a6df4;
+    }
+
+    .inline-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .edited-row {
+      background: #f8fbff;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #0b1e3a;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 99999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast i {
+      color: #22b573;
+      font-size: 16px;
+    }
+
+    /* ========== PAYMENT MODAL ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 30, 58, 0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      background: #ffffff;
+      border-radius: 26px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      animation: modalIn 0.25s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 24px 16px;
+      border-bottom: 1px solid #eef2f8;
+    }
+
+    .modal-header h3 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #0b1e3a;
+    }
+
+    .modal-close {
+      background: #f0f4fa;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4d5c6f;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover {
+      background: #fee9e7;
+      color: #c0392b;
+    }
+
+    .modal-body {
+      padding: 22px 24px;
+    }
+
+    .pay-summary {
+      background: #f8fbff;
+      border: 1px solid #e5eefc;
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+    }
+
+    .pay-summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #4d5c6f;
+      padding: 6px 0;
+    }
+
+    .pay-summary-row.total {
+      border-top: 1px solid #e5eefc;
+      margin-top: 6px;
+      padding-top: 12px;
+      font-weight: 700;
+      color: #0b1e3a;
+      font-size: 16px;
+    }
+
+    .pay-summary-row.total span:last-child {
+      color: #1e3c72;
+    }
+
+    .method-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4d5c6f;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .method-option {
+      border: 2px solid #eef2f8;
+      background: #fafcff;
+      border-radius: 14px;
+      padding: 14px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .method-option i {
+      font-size: 22px;
+      color: #7b8a9e;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .method-option span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #4d5c6f;
+      display: block;
+      line-height: 1.3;
+    }
+
+    .method-option:hover {
+      border-color: #b8d2ff;
+    }
+
+    .method-option.selected {
+      border-color: #2a6df4;
+      background: #f0f7ff;
+    }
+
+    .method-option.selected i {
+      color: #2a6df4;
+    }
+
+    .method-option.selected span {
+      color: #1e3c72;
+    }
+
+    .pay-input-group {
+      margin-bottom: 18px;
+    }
+
+    .pay-input-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4d5c6f;
+      margin-bottom: 7px;
+      display: block;
+    }
+
+    .pay-input-wrapper {
+      position: relative;
+    }
+
+    .pay-input-wrapper .peso-prefix {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 700;
+      color: #4d5c6f;
+      font-size: 15px;
+    }
+
+    .pay-input-wrapper input {
+      width: 100%;
+      padding: 14px 16px 14px 40px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 13px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e2a3a;
+      outline: none;
+      background: #fafcff;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .pay-input-wrapper input:focus {
+      border-color: #2a6df4;
+      box-shadow: 0 0 0 4px rgba(42, 109, 244, 0.1);
+      background: #ffffff;
+    }
+
+    .quick-amounts {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .quick-amount {
+      background: #f0f7ff;
+      border: 1px solid #d9e6ff;
+      color: #1e3c72;
+      padding: 7px 14px;
+      border-radius: 30px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .quick-amount:hover {
+      background: #e1efff;
+      border-color: #2a6df4;
+    }
+
+    .modal-error {
+      background: #fee9e7;
+      color: #c0392b;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 14px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-error.show {
+      display: flex;
+    }
+
+    .modal-footer {
+      padding: 0 24px 24px;
+    }
+
+    .modal-pay-btn {
+      width: 100%;
+      padding: 15px;
+      background: #1e3c72;
+      border: none;
+      border-radius: 14px;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s;
+    }
+
+    .modal-pay-btn:hover {
+      background: #14305e;
+    }
+
+    .method-detail {
+      font-size: 12.5px;
+      color: #7b8a9e;
+      margin-bottom: 18px;
+      padding: 10px 14px;
+      background: #f8fbff;
+      border-radius: 10px;
+      border: 1px dashed #d9e6ff;
+      display: none;
+    }
+
+    .method-detail.show {
+      display: block;
+    }
+
+    /* ========== RECEIPT MODAL ========== */
+    .receipt-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 30, 58, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+      padding: 20px;
+    }
+
+    .receipt-modal-overlay.show {
+      display: flex;
+    }
+
+    .receipt-modal {
+      background: #ffffff;
+      border-radius: 26px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+      animation: modalIn 0.3s ease;
+    }
+
+    .receipt-top {
+      padding: 24px 26px 0;
+    }
+
+    .receipt-icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 14px;
+    }
+
+    .receipt-icon-wrap.online {
+      background: #e9f7ef;
+      color: #1e8e5c;
+    }
+
+    .receipt-icon-wrap.official {
+      background: #fff3e0;
+      color: #b85e00;
+    }
+
+    .receipt-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: #0b1e3a;
+      margin-bottom: 4px;
+    }
+
+    .receipt-subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #7b8a9e;
+      margin-bottom: 22px;
+    }
+
+    .receipt-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin: 0 auto 18px;
+      width: fit-content;
+    }
+
+    .receipt-type-badge.online {
+      background: #e9f7ef;
+      color: #1e8e5c;
+    }
+
+    .receipt-type-badge.official {
+      background: #fff3e0;
+      color: #b85e00;
+    }
+
+    .receipt-paper {
+      background: #fafcff;
+      border: 1px solid #e5eefc;
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin: 0 26px 20px;
+      position: relative;
+    }
+
+    .receipt-paper.official {
+      background: #fffdf7;
+      border-color: #f0e0c0;
+    }
+
+    .receipt-paper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 16px 16px 0 0;
+      background: #22b573;
+    }
+
+    .receipt-paper.official::before {
+      background: #f39c12;
+    }
+
+    .receipt-ref {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed #d9e6ff;
+    }
+
+    .receipt-paper.official .receipt-ref {
+      border-bottom-color: #f0e0c0;
+    }
+
+    .receipt-ref-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #7b8a9e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .receipt-ref-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e3c72;
+      font-family: 'Courier New', monospace;
+    }
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      padding: 7px 0;
+      color: #4d5c6f;
+    }
+
+    .receipt-row span:last-child {
+      font-weight: 600;
+      color: #1e2a3a;
+    }
+
+    .receipt-row.amount {
+      margin-top: 8px;
+      padding-top: 14px;
+      border-top: 1px dashed #d9e6ff;
+      font-size: 15px;
+    }
+
+    .receipt-paper.official .receipt-row.amount {
+      border-top-color: #f0e0c0;
+    }
+
+    .receipt-row.amount span:last-child {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1e8e5c;
+    }
+
+    .receipt-paper.official .receipt-row.amount span:last-child {
+      color: #b85e00;
+    }
+
+    .receipt-balance {
+      background: #f0f7ff;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #1e3c72;
+      font-weight: 600;
+    }
+
+    .receipt-balance span:last-child {
+      font-weight: 800;
+    }
+
+    .receipt-footer-note {
+      margin: 0 26px 18px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.6;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .receipt-footer-note.online {
+      background: #f8fbff;
+      border: 1px dashed #d9e6ff;
+      color: #4d5c6f;
+    }
+
+    .receipt-footer-note.official {
+      background: #fffdf7;
+      border: 1px dashed #f0e0c0;
+      color: #8a6d3b;
+    }
+
+    .receipt-footer-note i {
+      font-size: 15px;
+      margin-top: 1px;
+    }
+
+    .receipt-footer-note.online i {
+      color: #2a6df4;
+    }
+
+    .receipt-footer-note.official i {
+      color: #f39c12;
+    }
+
+    .receipt-cashier-line {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed #f0e0c0;
+      font-size: 12px;
+      color: #8a6d3b;
+    }
+
+    .receipt-cashier-line span:last-child {
+      font-weight: 700;
+    }
+
+    .receipt-actions {
+      padding: 0 26px 26px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .receipt-actions button {
+      flex: 1;
+      padding: 13px;
+      border-radius: 13px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .receipt-btn-print {
+      background: #1e3c72;
+      border: none;
+      color: white;
+    }
+
+    .receipt-btn-print:hover {
+      background: #14305e;
+    }
+
+    .receipt-btn-print:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    .receipt-btn-close {
+      background: #f0f4fa;
+      border: 1.5px solid #e2e8f0;
+      color: #4d5c6f;
+    }
+
+    .receipt-btn-close:hover {
+      background: #e5ecf5;
+    }
+
+    /* ========== PRINT PROCESSING OVERLAY ========== */
+    .print-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 30, 58, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10002;
+      padding: 20px;
+    }
+
+    .print-overlay.show {
+      display: flex;
+    }
+
+    .print-card {
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 40px 44px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      animation: modalIn 0.3s ease;
+    }
+
+    .print-spinner {
+      width: 72px;
+      height: 72px;
+      border: 4px solid #e9edf4;
+      border-top-color: #2a6df4;
+      border-radius: 50%;
+      margin: 0 auto 22px;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .print-icon-success {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #e9f7ef;
+      color: #1e8e5c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 22px;
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.6); opacity: 0; }
+      70% { transform: scale(1.08); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .print-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0b1e3a;
+      margin-bottom: 8px;
+    }
+
+    .print-message {
+      font-size: 14px;
+      color: #7b8a9e;
+      line-height: 1.6;
+    }
+
+    .print-close-btn {
+      margin-top: 24px;
+      width: 100%;
+      padding: 13px;
+      background: #1e3c72;
+      border: none;
+      border-radius: 13px;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .print-close-btn.show {
+      display: flex;
+    }
+
+    .print-close-btn:hover {
+      background: #14305e;
+    }
+
+    @media (max-width: 1100px) {
+      .cards-grid, .finance-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .auth-screen {
+        flex-direction: column;
+      }
+      .auth-left {
+        padding: 36px;
+      }
+      .auth-right {
+        padding: 32px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .cards-grid, .finance-stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .app-header {
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .dashboard-container {
+        padding: 18px;
+      }
+      .auth-right {
+        padding: 28px 22px;
+      }
+      .role-selector {
+        flex-direction: column;
+      }
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+      .receipt-actions {
+        flex-direction: column;
+      }
+      .print-card {
+        padding: 30px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- ========== AUTH SCREEN ========== -->
+    <div id="authScreen" class="auth-screen">
+      <div class="auth-left">
+        <div class="brand">
+          <div class="brand-icon"><i class="fas fa-coins"></i></div>
+          <div class="brand-text">CMDI<span> Finance</span></div>
+        </div>
+        <h1>Manage your campus finances with confidence.</h1>
+        <p>One secure platform for students and finance staff — track payments, scholarships, and transactions in real time.</p>
+        <div class="auth-features">
+          <div class="auth-feature"><i class="fas fa-shield-alt"></i> Bank-level security & encryption</div>
+          <div class="auth-feature"><i class="fas fa-chart-line"></i> Real-time financial insights</div>
+          <div class="auth-feature"><i class="fas fa-mobile-alt"></i> Accessible on any device</div>
+        </div>
+      </div>
+
+      <div class="auth-right">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+          <button class="auth-tab" data-tab="signup"><i class="fas fa-user-plus"></i> Create Account</button>
+        </div>
+
+        <!-- LOGIN PANEL -->
+        <div id="loginPanel" class="auth-panel active">
+          <h2>Welcome back</h2>
+          <p class="subtitle">Choose your role and sign in to your account.</p>
+
+          <div id="loginError" class="auth-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="loginErrorMsg">Invalid credentials. Please try again.</span>
+          </div>
+          <div id="loginSuccess" class="auth-success">
+            <i class="fas fa-check-circle"></i>
+            <span id="loginSuccessMsg">Account created! Please sign in.</span>
+          </div>
+
+          <div class="role-selector" id="loginRoleSelector">
+            <div class="role-option selected" data-role="student">
+              <i class="fas fa-user-graduate"></i>
+              <span>Student</span>
+            </div>
+            <div class="role-option" data-role="finance">
+              <i class="fas fa-chart-pie"></i>
+              <span>Finance</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginEmail">Email address</label>
+            <div class="input-wrapper">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="loginEmail" placeholder="you@university.edu" autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="input-wrapper">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+            </div>
+          </div>
+
+          <div class="login-options">
+            <label><input type="checkbox" id="rememberMe"> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button class="auth-btn" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i> Sign in
+          </button>
+
+          <div class="demo-hint">
+            <strong>Demo credentials</strong><br>
+            Student: <code>student@edu.com</code> / <code>student123</code><br>
+            Finance: <code>finance@edu.com</code> / <code>finance123</code>
+          </div>
+        </div>
+
+        <!-- SIGNUP PANEL -->
+        <div id="signupPanel" class="auth-panel">
+          <h2>Create an account</h2>
+          <p class="subtitle">Fill in your details to register.</p>
+
+          <div id="signupError" class="auth-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="signupErrorMsg">Please fill in all fields correctly.</span>
+          </div>
+          <div id="signupSuccess" class="auth-success">
+            <i class="fas fa-check-circle"></i>
+            <span id="signupSuccessMsg">Account created successfully! You can now sign in.</span>
+          </div>
+
+          <div class="role-selector" id="signupRoleSelector">
+            <div class="role-option selected" data-role="student">
+              <i class="fas fa-user-graduate"></i>
+              <span>Student</span>
+            </div>
+            <div class="role-option" data-role="finance">
+              <i class="fas fa-chart-pie"></i>
+              <span>Finance</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupName">Full name</label>
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input type="text" id="signupName" placeholder="e.g. Jamie Doe" autocomplete="name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupEmail">Email address</label>
+            <div class="input-wrapper">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="signupEmail" placeholder="you@university.edu" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <div class="input-wrapper">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="signupPassword" placeholder="Min. 6 characters" autocomplete="new-password">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupConfirm">Confirm password</label>
+            <div class="input-wrapper">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="signupConfirm" placeholder="Re-enter password" autocomplete="new-password">
+            </div>
+          </div>
+
+          <div id="signupStudentNote" class="info-note">
+            <i class="fas fa-info-circle"></i>
+            <div>Your tuition amount and scholar status will be assigned by the Finance office after registration. Changes made by Finance will automatically reflect on your dashboard.</div>
+          </div>
+
+          <button class="auth-btn" id="signupBtn">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+
+          <div class="signup-footer">
+            Already have an account? <a id="goToLogin">Sign in</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== APP WRAPPER ========== -->
+    <div id="appWrapper" class="app-wrapper">
+      <header class="app-header">
+        <div class="logo-area">
+          <div class="logo-icon"><i class="fas fa-coins"></i></div>
+          <div class="logo-text">Edu<span>Finance</span></div>
+        </div>
+
+        <div class="header-right">
+          <div class="role-badge" id="roleBadge">
+            <i class="fas fa-user-graduate"></i>
+            <span id="roleBadgeText">Student</span>
+          </div>
+          <div class="notification-badge"><i class="fas fa-bell"></i></div>
+          <div class="avatar" id="userAvatar">JD</div>
+          <button class="logout-btn" id="logoutBtn" title="Sign out">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="dashboard-container">
+        <!-- ========== STUDENT DASHBOARD ========== -->
+        <div id="studentDashboard" class="student-dashboard">
+          <div class="section-title">
+            <span><i class="fas fa-smile" style="color: #2a6df4; margin-right: 10px;"></i> Welcome back, <span id="studentNameDisplay">Jamie</span></span>
+            <a href="#">View financial aid <i class="fas fa-arrow-right"></i></a>
+          </div>
+
+          <div class="cards-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span>Tuition balance</span>
+                <i class="fas fa-wallet stat-icon"></i>
+              </div>
+              <div class="stat-value" id="studentTuition">₱0.00</div>
+              <div class="stat-sub" id="studentTuitionSub">Awaiting finance assessment</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-header">
+                <span>Scholarship / grants</span>
+                <i class="fas fa-award stat-icon"></i>
+              </div>
+              <div class="stat-value" id="studentScholarship">₱0.00</div>
+              <div class="stat-sub" id="studentScholarStatus">Not a scholar</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-header">
+                <span>Net balance due</span>
+                <i class="fas fa-calendar-alt stat-icon"></i>
+              </div>
+              <div class="stat-value" id="studentNetDue">₱0.00</div>
+              <div class="stat-sub" id="studentNetDueSub">No payments due</div>
+              <div class="progress-wrapper" style="margin-top: 12px;">
+                <div class="progress-fill" id="studentNetProgress" style="width: 0%;"></div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-header">
+                <span>Total paid</span>
+                <i class="fas fa-check-circle stat-icon"></i>
+              </div>
+              <div class="stat-value" id="studentTotalPaid">₱0.00</div>
+              <div class="stat-sub" id="studentPaymentMode">No payment method set</div>
+              <div class="progress-wrapper" style="margin-top: 12px;">
+                <div class="progress-fill" id="studentPaidProgress" style="width: 0%; background: #22b573;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div class="panel">
+              <div class="section-title" style="margin-bottom: 14px;">
+                <span>Recent transactions</span>
+                <a href="#">See all</a>
+              </div>
+              <ul class="transaction-list" id="transactionList">
+                <!-- populated dynamically -->
+              </ul>
+            </div>
+
+            <div class="panel">
+              <div class="section-title" style="margin-bottom: 10px;">Upcoming payment</div>
+              <div class="payment-due-card">
+                <div class="due-label">Tuition installment · Fall 2025</div>
+                <div class="due-amount" id="studentDueAmount">₱0.00</div>
+                <div style="display: flex; gap: 8px; font-size: 14px; color: #4d5c6f;" id="studentDueStatus">
+                  <i class="fas fa-check-circle" style="color: #22b573;"></i> No payments due
+                </div>
+                <button class="btn-primary" id="studentPayBtn" disabled style="opacity: 0.5; cursor: not-allowed;"><i class="fas fa-credit-card"></i> Pay now</button>
+                <button class="btn-outline" id="studentReminderBtn" disabled style="opacity: 0.5; cursor: not-allowed;"><i class="fas fa-calendar-check"></i> Set reminder</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== FINANCE DASHBOARD ========== -->
+        <div id="financeDashboard" class="finance-dashboard">
+          <div class="section-title">
+            <span><i class="fas fa-chart-line" style="color: #2a6df4; margin-right: 10px;"></i> Finance overview</span>
+            <a href="#"><i class="fas fa-download"></i> Export report</a>
+          </div>
+
+          <div class="finance-stats-grid">
+            <div class="finance-stat-card">
+              <div class="stat-header">
+                <span>Total tuition</span>
+                <i class="fas fa-circle-dollar stat-icon" style="color: #22b573;"></i>
+              </div>
+              <div class="stat-value" id="financeTotalTuition">₱0.00</div>
+              <div class="stat-sub" id="financeStudentCount">0 students</div>
+            </div>
+            <div class="finance-stat-card">
+              <div class="stat-header">
+                <span>Total collected</span>
+                <i class="fas fa-hand-holding-heart stat-icon" style="color: #f39c12;"></i>
+              </div>
+              <div class="stat-value" id="financeTotalCollected">₱0.00</div>
+              <div class="stat-sub" id="financePaymentCount">0 payments</div>
+            </div>
+            <div class="finance-stat-card">
+              <div class="stat-header">
+                <span>Net receivable</span>
+                <i class="fas fa-clock stat-icon" style="color: #2a6df4;"></i>
+              </div>
+              <div class="stat-value" id="financeNetReceivable">₱0.00</div>
+              <div class="stat-sub">After payments & scholarship</div>
+            </div>
+            <div class="finance-stat-card">
+              <div class="stat-header">
+                <span>Total scholarships</span>
+                <i class="fas fa-award stat-icon" style="color: #9b59b6;"></i>
+              </div>
+              <div class="stat-value" id="financeTotalScholarship">₱0.00</div>
+              <div class="stat-sub" id="financeScholarCount">0 scholars</div>
+            </div>
+          </div>
+
+          <div class="management-tabs">
+            <button class="mgmt-tab active" data-mgmt="accounts"><i class="fas fa-users"></i> Account Management</button>
+            <button class="mgmt-tab" data-mgmt="payments"><i class="fas fa-file-invoice-dollar"></i> Payment Records</button>
+          </div>
+
+          <!-- ACCOUNT MANAGEMENT PANEL -->
+          <div id="mgmtAccounts" class="mgmt-panel active">
+            <div class="summary-strip">
+              <div class="summary-chip"><i class="fas fa-user-graduate"></i> Students: <strong id="chipStudents">0</strong></div>
+              <div class="summary-chip"><i class="fas fa-award"></i> Scholars: <strong id="chipScholars">0</strong></div>
+              <div class="summary-chip"><i class="fas fa-chalkboard-teacher"></i> Finance: <strong id="chipFinance">0</strong></div>
+              <div class="summary-chip"><i class="fas fa-money-bill-wave"></i> Total tuition: <strong id="chipTuition">₱0.00</strong></div>
+            </div>
+
+            <div class="panel" style="padding: 18px 18px 8px;">
+              <div class="section-title" style="margin-bottom: 12px;">
+                <span>All registered accounts</span>
+                <a href="#" id="refreshAccounts"><i class="fas fa-sync-alt"></i> Refresh</a>
+              </div>
+              <div class="table-wrapper">
+                <table id="accountsTable">
+                  <thead>
+                    <tr>
+                      <th>Account</th>
+                      <th>Role</th>
+                      <th>Tuition (₱)</th>
+                      <th>Scholar</th>
+                      <th>Scholarship</th>
+                      <th>Paid</th>
+                      <th>Net due</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="accountsTableBody">
+                    <!-- populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+              <div style="padding: 14px 8px 8px; font-size: 12.5px; color: #7b8a9e; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-lightbulb" style="color: #f39c12;"></i>
+                Finance staff can edit tuition and toggle scholar status. Changes are saved instantly and reflected on the student's dashboard.
+              </div>
+            </div>
+          </div>
+
+          <!-- PAYMENT RECORDS PANEL -->
+          <div id="mgmtPayments" class="mgmt-panel">
+            <div class="panel" style="padding: 18px 18px 8px;">
+              <div class="section-title" style="margin-bottom: 12px;">
+                <span>Payment records</span>
+                <a href="#">All payments <i class="fas fa-arrow-right"></i></a>
+              </div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>Amount paid</th>
+                      <th>Method</th>
+                      <th>Receipt</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="paymentRecordsBody">
+                    <!-- populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- toast -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMsg">Changes saved</span>
+  </div>
+
+  <!-- ========== PAYMENT MODAL ========== -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-credit-card" style="color: #2a6df4; margin-right: 8px;"></i> Make a payment</h3>
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="pay-summary">
+          <div class="pay-summary-row"><span>Tuition balance</span><span id="modalTuition">₱0.00</span></div>
+          <div class="pay-summary-row"><span>Scholarship</span><span id="modalScholarship">₱0.00</span></div>
+          <div class="pay-summary-row"><span>Previously paid</span><span id="modalPaid">₱0.00</span></div>
+          <div class="pay-summary-row total"><span>Outstanding balance</span><span id="modalOutstanding">₱0.00</span></div>
+        </div>
+
+        <span class="method-label">Payment method</span>
+        <div class="method-grid" id="methodGrid">
+          <div class="method-option" data-method="Online Bank">
+            <i class="fas fa-university"></i>
+            <span>Online Bank</span>
+          </div>
+          <div class="method-option" data-method="Card">
+            <i class="fas fa-credit-card"></i>
+            <span>Card</span>
+          </div>
+          <div class="method-option" data-method="Cash">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Cash</span>
+          </div>
+        </div>
+
+        <div class="method-detail" id="methodDetail"></div>
+
+        <div class="modal-error" id="modalError">
+          <i class="fas fa-exclamation-circle"></i>
+          <span id="modalErrorMsg">Please select a payment method and enter an amount.</span>
+        </div>
+
+        <div class="pay-input-group">
+          <label for="payAmount">Amount to pay (₱)</label>
+          <div class="pay-input-wrapper">
+            <span class="peso-prefix">₱</span>
+            <input type="number" id="payAmount" placeholder="0.00" min="0" step="0.01">
+          </div>
+          <div class="quick-amounts" id="quickAmounts">
+            <!-- populated dynamically -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-pay-btn" id="confirmPayBtn">
+          <i class="fas fa-check"></i> Confirm payment
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== RECEIPT MODAL ========== -->
+  <div class="receipt-modal-overlay" id="receiptModal">
+    <div class="receipt-modal" id="receiptModalContent">
+      <!-- populated dynamically -->
+    </div>
+  </div>
+
+  <!-- ========== PRINT PROCESSING OVERLAY ========== -->
+  <div class="print-overlay" id="printOverlay">
+    <div class="print-card" id="printCard">
+      <!-- populated dynamically -->
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ========== DOM ==========
+      const authScreen = document.getElementById('authScreen');
+      const appWrapper = document.getElementById('appWrapper');
+      const loginPanel = document.getElementById('loginPanel');
+      const signupPanel = document.getElementById('signupPanel');
+      const authTabs = document.querySelectorAll('.auth-tab');
+      const loginBtn = document.getElementById('loginBtn');
+      const signupBtn = document.getElementById('signupBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const goToLogin = document.getElementById('goToLogin');
+
+      const loginEmail = document.getElementById('loginEmail');
+      const loginPassword = document.getElementById('loginPassword');
+      const loginError = document.getElementById('loginError');
+      const loginErrorMsg = document.getElementById('loginErrorMsg');
+      const loginSuccess = document.getElementById('loginSuccess');
+      const loginSuccessMsg = document.getElementById('loginSuccessMsg');
+
+      const signupName = document.getElementById('signupName');
+      const signupEmail = document.getElementById('signupEmail');
+      const signupPassword = document.getElementById('signupPassword');
+      const signupConfirm = document.getElementById('signupConfirm');
+      const signupError = document.getElementById('signupError');
+      const signupErrorMsg = document.getElementById('signupErrorMsg');
+      const signupSuccess = document.getElementById('signupSuccess');
+      const signupSuccessMsg = document.getElementById('signupSuccessMsg');
+      const signupStudentNote = document.getElementById('signupStudentNote');
+
+      const loginRoleSelector = document.getElementById('loginRoleSelector');
+      const signupRoleSelector = document.getElementById('signupRoleSelector');
+
+      const avatar = document.getElementById('userAvatar');
+      const studentNameDisplay = document.getElementById('studentNameDisplay');
+      const roleBadge = document.getElementById('roleBadge');
+      const roleBadgeText = document.getElementById('roleBadgeText');
+
+      const studentDashboard = document.getElementById('studentDashboard');
+      const financeDashboard = document.getElementById('financeDashboard');
+
+      // student display
+      const studentTuition = document.getElementById('studentTuition');
+      const studentTuitionSub = document.getElementById('studentTuitionSub');
+      const studentScholarship = document.getElementById('studentScholarship');
+      const studentScholarStatus = document.getElementById('studentScholarStatus');
+      const studentNetDue = document.getElementById('studentNetDue');
+      const studentNetDueSub = document.getElementById('studentNetDueSub');
+      const studentNetProgress = document.getElementById('studentNetProgress');
+      const studentTotalPaid = document.getElementById('studentTotalPaid');
+      const studentPaymentMode = document.getElementById('studentPaymentMode');
+      const studentPaidProgress = document.getElementById('studentPaidProgress');
+      const studentDueAmount = document.getElementById('studentDueAmount');
+      const studentDueStatus = document.getElementById('studentDueStatus');
+      const studentPayBtn = document.getElementById('studentPayBtn');
+      const studentReminderBtn = document.getElementById('studentReminderBtn');
+      const transactionList = document.getElementById('transactionList');
+
+      // finance display
+      const financeTotalTuition = document.getElementById('financeTotalTuition');
+      const financeStudentCount = document.getElementById('financeStudentCount');
+      const financeTotalCollected = document.getElementById('financeTotalCollected');
+      const financePaymentCount = document.getElementById('financePaymentCount');
+      const financeNetReceivable = document.getElementById('financeNetReceivable');
+      const financeTotalScholarship = document.getElementById('financeTotalScholarship');
+      const financeScholarCount = document.getElementById('financeScholarCount');
+
+      const accountsTableBody = document.getElementById('accountsTableBody');
+      const paymentRecordsBody = document.getElementById('paymentRecordsBody');
+      const chipStudents = document.getElementById('chipStudents');
+      const chipScholars = document.getElementById('chipScholars');
+      const chipFinance = document.getElementById('chipFinance');
+      const chipTuition = document.getElementById('chipTuition');
+      const refreshAccounts = document.getElementById('refreshAccounts');
+
+      const mgmtTabs = document.querySelectorAll('.mgmt-tab');
+      const mgmtAccounts = document.getElementById('mgmtAccounts');
+      const mgmtPayments = document.getElementById('mgmtPayments');
+
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+
+      // payment modal
+      const paymentModal = document.getElementById('paymentModal');
+      const modalClose = document.getElementById('modalClose');
+      const modalTuition = document.getElementById('modalTuition');
+      const modalScholarship = document.getElementById('modalScholarship');
+      const modalPaid = document.getElementById('modalPaid');
+      const modalOutstanding = document.getElementById('modalOutstanding');
+      const methodGrid = document.getElementById('methodGrid');
+      const methodDetail = document.getElementById('methodDetail');
+      const payAmount = document.getElementById('payAmount');
+      const quickAmounts = document.getElementById('quickAmounts');
+      const modalError = document.getElementById('modalError');
+      const modalErrorMsg = document.getElementById('modalErrorMsg');
+      const confirmPayBtn = document.getElementById('confirmPayBtn');
+
+      // receipt modal
+      const receiptModal = document.getElementById('receiptModal');
+      const receiptModalContent = document.getElementById('receiptModalContent');
+
+      // print overlay
+      const printOverlay = document.getElementById('printOverlay');
+      const printCard = document.getElementById('printCard');
+
+      // ========== HELPERS ==========
+      const peso = (n) => '₱' + Number(n).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      function getInitials(name) {
+        return name.trim().split(/\s+/).map(p => p[0]).slice(0, 2).join('').toUpperCase();
+      }
+
+      function generateStudentId() {
+        return 'STU-' + Math.floor(1000 + Math.random() * 9000);
+      }
+
+      function generateOnlineReceiptNo() {
+        return 'OL-' + Date.now().toString().slice(-8) + '-' + Math.floor(100 + Math.random() * 900);
+      }
+
+      function generateOfficialReceiptNo() {
+        return 'OR-' + new Date().getFullYear() + '-' + String(Math.floor(1000 + Math.random() * 9000));
+      }
+
+      function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      let toastTimeout = null;
+      function showToast(message) {
+        toastMsg.textContent = message;
+        toast.classList.add('show');
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2800);
+      }
+
+      function formatDate(d) {
+        return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+      }
+
+      function formatDateTime(d) {
+        const date = new Date(d);
+        return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) +
+          ' · ' + date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      }
+
+      // ========== USER STORE ==========
+      let USERS = [
+        {
+          name: 'Jamie Doe',
+          email: 'student@edu.com',
+          password: 'student123',
+          role: 'student',
+          initials: 'JD',
+          studentId: 'STU-1082',
+          tuition: 0,
+          isScholar: false,
+          scholarship: 0,
+          paid: 0,
+          paymentMethod: null,
+          payments: []
+        },
+        {
+          name: 'Finance Staff',
+          email: 'finance@edu.com',
+          password: 'finance123',
+          role: 'finance',
+          initials: 'FS'
+        }
+      ];
+
+      let loginSelectedRole = 'student';
+      let signupSelectedRole = 'student';
+      let currentUser = null;
+      let editingUserId = null;
+      let modalMethod = null;
+
+      // ========== TAB SWITCHING ==========
+      authTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.tab;
+          authTabs.forEach(t => t.classList.toggle('active', t === tab));
+          loginPanel.classList.toggle('active', target === 'login');
+          signupPanel.classList.toggle('active', target === 'signup');
+          loginError.style.display = 'none';
+          loginSuccess.style.display = 'none';
+          signupError.style.display = 'none';
+          signupSuccess.style.display = 'none';
+        });
+      });
+
+      goToLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.auth-tab[data-tab="login"]').click();
+      });
+
+      // ========== ROLE SELECTORS ==========
+      loginRoleSelector.querySelectorAll('.role-option').forEach(option => {
+        option.addEventListener('click', () => {
+          loginRoleSelector.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+          option.classList.add('selected');
+          loginSelectedRole = option.dataset.role;
+          if (loginSelectedRole === 'student') {
+            loginEmail.value = 'student@edu.com';
+            loginPassword.value = 'student123';
+          } else {
+            loginEmail.value = 'finance@edu.com';
+            loginPassword.value = 'finance123';
+          }
+        });
+      });
+
+      signupRoleSelector.querySelectorAll('.role-option').forEach(option => {
+        option.addEventListener('click', () => {
+          signupRoleSelector.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+          option.classList.add('selected');
+          signupSelectedRole = option.dataset.role;
+          signupStudentNote.style.display = signupSelectedRole === 'student' ? 'flex' : 'none';
+        });
+      });
+
+      // ========== LOGIN HANDLER ==========
+      loginBtn.addEventListener('click', () => {
+        const email = loginEmail.value.trim().toLowerCase();
+        const password = loginPassword.value;
+        loginError.style.display = 'none';
+        loginSuccess.style.display = 'none';
+
+        if (!email || !password) {
+          loginErrorMsg.textContent = 'Please enter both email and password.';
+          loginError.style.display = 'flex';
+          return;
+        }
+
+        const user = USERS.find(u => u.email.toLowerCase() === email && u.password === password);
+
+        if (!user) {
+          loginErrorMsg.textContent = 'Invalid credentials. Please check your email and password.';
+          loginError.style.display = 'flex';
+          return;
+        }
+
+        if (user.role !== loginSelectedRole) {
+          loginErrorMsg.textContent = `This account is registered as ${user.role}. Please select the correct role.`;
+          loginError.style.display = 'flex';
+          return;
+        }
+
+        currentUser = user;
+        authScreen.style.display = 'none';
+        appWrapper.style.display = 'flex';
+        avatar.textContent = user.initials;
+        studentNameDisplay.textContent = user.name.split(' ')[0];
+
+        if (user.role === 'student') {
+          switchDashboard('student');
+          avatar.style.background = '#2a6df4';
+          roleBadge.style.background = '#f0f7ff';
+          roleBadge.style.color = '#1e3c72';
+          roleBadge.querySelector('i').className = 'fas fa-user-graduate';
+          roleBadgeText.textContent = 'Student';
+          updateStudentDashboard(user);
+        } else {
+          switchDashboard('finance');
+          avatar.style.background = '#1e3c72';
+          roleBadge.style.background = '#f0f4fa';
+          roleBadge.style.color = '#1e3c72';
+          roleBadge.querySelector('i').className = 'fas fa-chart-pie';
+          roleBadgeText.textContent = 'Finance';
+          updateFinanceDashboard();
+        }
+      });
+
+      [loginEmail, loginPassword].forEach(input => {
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') loginBtn.click();
+        });
+      });
+
+      // ========== SIGNUP HANDLER ==========
+      signupBtn.addEventListener('click', () => {
+        const name = signupName.value.trim();
+        const email = signupEmail.value.trim().toLowerCase();
+        const password = signupPassword.value;
+        const confirm = signupConfirm.value;
+
+        signupError.style.display = 'none';
+        signupSuccess.style.display = 'none';
+
+        if (!name || !email || !password || !confirm) {
+          signupErrorMsg.textContent = 'Please fill in all fields.';
+          signupError.style.display = 'flex';
+          return;
+        }
+
+        if (name.length < 2) {
+          signupErrorMsg.textContent = 'Please enter your full name.';
+          signupError.style.display = 'flex';
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          signupErrorMsg.textContent = 'Please enter a valid email address.';
+          signupError.style.display = 'flex';
+          return;
+        }
+
+        if (password.length < 6) {
+          signupErrorMsg.textContent = 'Password must be at least 6 characters.';
+          signupError.style.display = 'flex';
+          return;
+        }
+
+        if (password !== confirm) {
+          signupErrorMsg.textContent = 'Passwords do not match.';
+          signupError.style.display = 'flex';
+          return;
+        }
+
+        if (USERS.some(u => u.email.toLowerCase() === email)) {
+          signupErrorMsg.textContent = 'An account with this email already exists.';
+          signupError.style.display = 'flex';
+          return;
+        }
+
+        const newUser = {
+          name: name,
+          email: email,
+          password: password,
+          role: signupSelectedRole,
+          initials: getInitials(name)
+        };
+
+        if (signupSelectedRole === 'student') {
+          newUser.studentId = generateStudentId();
+          newUser.tuition = 0;
+          newUser.isScholar = false;
+          newUser.scholarship = 0;
+          newUser.paid = 0;
+          newUser.paymentMethod = null;
+          newUser.payments = [];
+        }
+
+        USERS.push(newUser);
+
+        signupSuccessMsg.textContent = signupSelectedRole === 'student'
+          ? `Account created for ${name}! Finance will assign your tuition and scholar status. You can now sign in.`
+          : `Finance account created for ${name}! You can now sign in.`;
+        signupSuccess.style.display = 'flex';
+
+        signupName.value = '';
+        signupEmail.value = '';
+        signupPassword.value = '';
+        signupConfirm.value = '';
+
+        setTimeout(() => {
+          document.querySelector('.auth-tab[data-tab="login"]').click();
+          loginEmail.value = email;
+          loginPassword.value = '';
+          loginSelectedRole = signupSelectedRole;
+          loginRoleSelector.querySelectorAll('.role-option').forEach(o => {
+            o.classList.toggle('selected', o.dataset.role === signupSelectedRole);
+          });
+        }, 1800);
+      });
+
+      // ========== DASHBOARD SWITCHING ==========
+      function switchDashboard(role) {
+        if (role === 'student') {
+          studentDashboard.style.display = 'block';
+          financeDashboard.style.display = 'none';
+        } else {
+          studentDashboard.style.display = 'none';
+          financeDashboard.style.display = 'block';
+        }
+      }
+
+      // ========== CALCULATE OUTSTANDING ==========
+      function getOutstanding(user) {
+        const tuition = user.tuition || 0;
+        const scholarship = user.scholarship || 0;
+        const paid = user.paid || 0;
+        return Math.max(0, tuition - scholarship - paid);
+      }
+
+      // ========== UPDATE STUDENT DASHBOARD ==========
+      function updateStudentDashboard(user) {
+        if (!user) return;
+        const tuition = user.tuition || 0;
+        const scholarship = user.scholarship || 0;
+        const paid = user.paid || 0;
+        const outstanding = getOutstanding(user);
+        const netBase = Math.max(0, tuition - scholarship);
+
+        studentTuition.textContent = peso(tuition);
+        studentTuitionSub.textContent = tuition > 0 ? 'Assigned by Finance' : 'Awaiting finance assessment';
+
+        studentScholarship.textContent = peso(scholarship);
+        if (user.isScholar) {
+          studentScholarStatus.innerHTML = '<span class="badge">Scholar · 50% covered</span>';
+        } else {
+          studentScholarStatus.textContent = 'Not a scholar';
+        }
+
+        studentNetDue.textContent = peso(outstanding);
+        studentNetDueSub.textContent = outstanding > 0 ? 'Remaining after payments & scholarship' : 'Fully settled';
+        const coverage = netBase > 0 ? Math.min(100, (paid / netBase) * 100) : (tuition > 0 ? 100 : 0);
+        studentNetProgress.style.width = coverage + '%';
+
+        studentTotalPaid.textContent = peso(paid);
+        if (user.paymentMethod) {
+          studentPaymentMode.textContent = 'Last method: ' + user.paymentMethod;
+        } else {
+          studentPaymentMode.textContent = 'No payment method set';
+        }
+        const paidProgress = netBase > 0 ? Math.min(100, (paid / netBase) * 100) : 0;
+        studentPaidProgress.style.width = paidProgress + '%';
+
+        studentDueAmount.textContent = peso(outstanding);
+        if (outstanding > 0) {
+          studentDueStatus.innerHTML = '<i class="fas fa-clock" style="color: #f39c12;"></i> Payment required';
+          studentPayBtn.disabled = false;
+          studentPayBtn.style.opacity = '1';
+          studentPayBtn.style.cursor = 'pointer';
+          studentReminderBtn.disabled = false;
+          studentReminderBtn.style.opacity = '1';
+          studentReminderBtn.style.cursor = 'pointer';
+        } else {
+          studentDueStatus.innerHTML = '<i class="fas fa-check-circle" style="color: #22b573;"></i> No payments due';
+          studentPayBtn.disabled = true;
+          studentPayBtn.style.opacity = '0.5';
+          studentPayBtn.style.cursor = 'not-allowed';
+          studentReminderBtn.disabled = true;
+          studentReminderBtn.style.opacity = '0.5';
+          studentReminderBtn.style.cursor = 'not-allowed';
+        }
+
+        renderStudentTransactions(user);
+      }
+
+      // ========== RENDER STUDENT TRANSACTIONS ==========
+      function renderStudentTransactions(user) {
+        if (!transactionList) return;
+        const payments = user.payments || [];
+
+        if (payments.length === 0) {
+          transactionList.innerHTML = `
+            <li class="transaction-item" style="justify-content: center; padding: 32px 0; color: #7b8a9e;">
+              <div style="text-align: center;">
+                <i class="fas fa-receipt" style="font-size: 28px; color: #cbd5e0; margin-bottom: 8px; display: block;"></i>
+                <span style="font-size: 14px;">No transactions yet</span>
+              </div>
+            </li>`;
+          return;
+        }
+
+        const sorted = [...payments].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        transactionList.innerHTML = sorted.map(p => {
+          const icon = p.method === 'Card' ? 'fa-credit-card'
+            : p.method === 'Online Bank' ? 'fa-university'
+            : 'fa-money-bill-wave';
+          const isOfficial = p.receiptType === 'official';
+          const receiptIcon = isOfficial ? 'fa-file-invoice' : 'fa-receipt';
+
+          return `
+            <li class="transaction-item">
+              <div class="tx-left">
+                <div class="tx-icon"><i class="fas ${icon}"></i></div>
+                <div class="tx-info">
+                  <h4>Tuition payment</h4>
+                  <p>${p.method} · ${formatDate(new Date(p.date))}</p>
+                </div>
+              </div>
+              <div class="tx-right">
+                <div class="tx-amount credit">-${peso(p.amount)}</div>
+                <button class="receipt-btn" data-receipt-id="${p.id}">
+                  <i class="fas ${receiptIcon}"></i> ${isOfficial ? 'OR' : 'e-Receipt'}
+                </button>
+              </div>
+            </li>`;
+        }).join('');
+
+        transactionList.querySelectorAll('[data-receipt-id]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const payment = (currentUser.payments || []).find(p => p.id === btn.dataset.receiptId);
+            if (payment) openReceipt(currentUser, payment);
+          });
+        });
+      }
+
+      // ========== UPDATE FINANCE DASHBOARD ==========
+      function updateFinanceDashboard() {
+        const students = USERS.filter(u => u.role === 'student');
+        const financeUsers = USERS.filter(u => u.role === 'finance');
+
+        const totalTuition = students.reduce((s, u) => s + (u.tuition || 0), 0);
+        const totalScholarship = students.reduce((s, u) => s + (u.scholarship || 0), 0);
+        const totalCollected = students.reduce((s, u) => s + (u.paid || 0), 0);
+        const totalPayments = students.reduce((s, u) => s + (u.payments ? u.payments.length : 0), 0);
+        const netReceivable = students.reduce((s, u) => s + getOutstanding(u), 0);
+        const scholarCount = students.filter(u => u.isScholar).length;
+
+        financeTotalTuition.textContent = peso(totalTuition);
+        financeStudentCount.textContent = students.length + ' student' + (students.length !== 1 ? 's' : '');
+        financeTotalCollected.textContent = peso(totalCollected);
+        financePaymentCount.textContent = totalPayments + ' payment' + (totalPayments !== 1 ? 's' : '');
+        financeNetReceivable.textContent = peso(netReceivable);
+        financeTotalScholarship.textContent = peso(totalScholarship);
+        financeScholarCount.textContent = scholarCount + ' scholar' + (scholarCount !== 1 ? 's' : '');
+
+        chipStudents.textContent = students.length;
+        chipScholars.textContent = scholarCount;
+        chipFinance.textContent = financeUsers.length;
+        chipTuition.textContent = peso(totalTuition);
+
+        renderAccountsTable();
+        renderPaymentRecords();
+      }
+
+      // ========== RENDER ACCOUNTS TABLE ==========
+      function renderAccountsTable() {
+        if (!accountsTableBody) return;
+
+        if (USERS.length === 0) {
+          accountsTableBody.innerHTML = `
+            <tr>
+              <td colspan="8">
+                <div class="empty-state">
+                  <i class="fas fa-users"></i>
+                  <p>No accounts registered yet</p>
+                </div>
+              </td>
+            </tr>`;
+          return;
+        }
+
+        const sorted = [...USERS].sort((a, b) => {
+          if (a.role !== b.role) return a.role === 'student' ? -1 : 1;
+          return a.name.localeCompare(b.name);
+        });
+
+        accountsTableBody.innerHTML = sorted.map(u => {
+          const isStudent = u.role === 'student';
+          const isEditing = editingUserId === u.email;
+          const tuition = u.tuition || 0;
+          const scholarship = u.scholarship || 0;
+          const paid = u.paid || 0;
+          const outstanding = getOutstanding(u);
+          const avatarClass = isStudent ? 'mini-avatar' : 'mini-avatar finance';
+
+          const accountCell = `
+            <div class="account-name">
+              <div class="${avatarClass}">${u.initials}</div>
+              <div class="account-name-info">
+                <h4>${escapeHtml(u.name)}</h4>
+                <p>${escapeHtml(u.email)}</p>
+              </div>
+            </div>`;
+
+          const roleCell = `<span class="status ${isStudent ? 'pending' : 'paid'}">${isStudent ? 'Student' : 'Finance'}</span>`;
+
+          if (!isStudent) {
+            return `
+              <tr>
+                <td>${accountCell}</td>
+                <td>${roleCell}</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="badge info">Staff</span></td>
+              </tr>`;
+          }
+
+          if (isEditing) {
+            return `
+              <tr class="edited-row">
+                <td>${accountCell}</td>
+                <td>${roleCell}</td>
+                <td>
+                  <input type="number" class="inline-input" id="editTuition_${escapeHtml(u.email)}"
+                         value="${tuition}" min="0" step="0.01" placeholder="0.00">
+                </td>
+                <td>
+                  <span class="inline-toggle ${u.isScholar ? 'active' : ''}" id="editScholar_${escapeHtml(u.email)}">
+                    <span class="toggle-switch"></span>
+                    <span>${u.isScholar ? 'Yes' : 'No'}</span>
+                  </span>
+                </td>
+                <td id="editScholarshipDisplay_${escapeHtml(u.email)}">${peso(scholarship)}</td>
+                <td>${peso(paid)}</td>
+                <td id="editNetDisplay_${escapeHtml(u.email)}">${peso(outstanding)}</td>
+                <td>
+                  <div class="inline-actions">
+                    <button class="action-btn save" data-action="save" data-email="${escapeHtml(u.email)}">Save</button>
+                    <button class="action-btn cancel" data-action="cancel" data-email="${escapeHtml(u.email)}">Cancel</button>
+                  </div>
+                </td>
+              </tr>`;
+          }
+
+          let statusBadge;
+          if (u.isScholar) {
+            statusBadge = '<span class="badge">Scholar</span>';
+          } else if (tuition > 0) {
+            statusBadge = '<span class="badge warning">Regular</span>';
+          } else {
+            statusBadge = '<span class="badge info">Unassigned</span>';
+          }
+
+          return `
+            <tr>
+              <td>${accountCell}</td>
+              <td>${roleCell}</td>
+              <td>${peso(tuition)}</td>
+              <td>
+                <span class="inline-toggle ${u.isScholar ? 'active' : ''}" style="pointer-events: none;">
+                  <span class="toggle-switch"></span>
+                  <span>${u.isScholar ? 'Yes' : 'No'}</span>
+                </span>
+              </td>
+              <td>${peso(scholarship)}</td>
+              <td>${peso(paid)}</td>
+              <td>${peso(outstanding)}</td>
+              <td>
+                <div class="inline-actions">
+                  <button class="action-btn edit" data-action="edit" data-email="${escapeHtml(u.email)}">
+                    <i class="fas fa-pen"></i> Edit
+                  </button>
+                </div>
+              </td>
+            </tr>`;
+        }).join('');
+
+        attachAccountTableListeners();
+      }
+
+      // ========== RENDER PAYMENT RECORDS ==========
+      function renderPaymentRecords() {
+        if (!paymentRecordsBody) return;
+
+        const records = [];
+        USERS.filter(u => u.role === 'student').forEach(u => {
+          (u.payments || []).forEach(p => {
+            records.push({
+              student: u,
+              payment: p
+            });
+          });
+        });
+
+        if (records.length === 0) {
+          paymentRecordsBody.innerHTML = `
+            <tr>
+              <td colspan="6">
+                <div class="empty-state">
+                  <i class="fas fa-receipt"></i>
+                  <p>No payments recorded yet</p>
+                </div>
+              </td>
+            </tr>`;
+          return;
+        }
+
+        records.sort((a, b) => new Date(b.payment.date) - new Date(a.payment.date));
+
+        paymentRecordsBody.innerHTML = records.map(r => {
+          const p = r.payment;
+          const icon = p.method === 'Card' ? 'fa-credit-card'
+            : p.method === 'Online Bank' ? 'fa-university'
+            : 'fa-money-bill-wave';
+          const isOfficial = p.receiptType === 'official';
+          const receiptLabel = isOfficial ? 'Official Receipt' : 'Online Receipt';
+          const receiptIcon = isOfficial ? 'fa-file-invoice' : 'fa-receipt';
+          const receiptNo = p.receiptNo || '—';
+
+          return `
+            <tr>
+              <td>
+                <div class="account-name">
+                  <div class="mini-avatar">${r.student.initials}</div>
+                  <div class="account-name-info">
+                    <h4>${escapeHtml(r.student.name)}</h4>
+                  </div>
+                </div>
+              </td>
+              <td><strong>${peso(p.amount)}</strong></td>
+              <td><i class="fas ${icon}" style="color: #2a6df4; margin-right: 6px;"></i> ${p.method}</td>
+              <td>
+                <button class="receipt-btn" data-receipt-email="${escapeHtml(r.student.email)}" data-receipt-id="${p.id}">
+                  <i class="fas ${receiptIcon}"></i> ${receiptNo}
+                </button>
+                <div style="font-size: 10.5px; color: #7b8a9e; margin-top: 3px;">${receiptLabel}</div>
+              </td>
+              <td>${formatDate(new Date(p.date))}</td>
+              <td><span class="status paid">Paid</span></td>
+            </tr>`;
+        }).join('');
+
+        paymentRecordsBody.querySelectorAll('[data-receipt-email]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const student = USERS.find(u => u.email === btn.dataset.receiptEmail);
+            if (!student) return;
+            const payment = (student.payments || []).find(p => p.id === btn.dataset.receiptId);
+            if (payment) openReceipt(student, payment);
+          });
+        });
+      }
+
+      // ========== ACCOUNT TABLE LISTENERS ==========
+      function attachAccountTableListeners() {
+        accountsTableBody.querySelectorAll('[data-action="edit"]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            editingUserId = btn.dataset.email;
+            renderAccountsTable();
+          });
+        });
+
+        accountsTableBody.querySelectorAll('[data-action="cancel"]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            editingUserId = null;
+            renderAccountsTable();
+          });
+        });
+
+        accountsTableBody.querySelectorAll('[data-action="save"]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const email = btn.dataset.email;
+            const user = USERS.find(u => u.email === email);
+            if (!user) return;
+
+            const tuitionInput = document.getElementById('editTuition_' + email);
+            const scholarToggle = document.getElementById('editScholar_' + email);
+
+            const newTuition = parseFloat(tuitionInput.value);
+            const safeTuition = isNaN(newTuition) || newTuition < 0 ? 0 : newTuition;
+            const newScholar = scholarToggle.classList.contains('active');
+
+            user.tuition = safeTuition;
+            user.isScholar = newScholar;
+            user.scholarship = newScholar ? safeTuition * 0.5 : 0;
+
+            const netBase = Math.max(0, user.tuition - user.scholarship);
+            if (user.paid > netBase) {
+              user.paid = netBase;
+            }
+
+            editingUserId = null;
+            updateFinanceDashboard();
+            showToast(`Saved: ${user.name} — Tuition ${peso(user.tuition)}, Scholar ${user.isScholar ? 'Yes' : 'No'}`);
+
+            if (currentUser && currentUser.email === user.email) {
+              updateStudentDashboard(user);
+            }
+          });
+        });
+
+        if (editingUserId) {
+          const tuitionInput = document.getElementById('editTuition_' + editingUserId);
+          const scholarToggle = document.getElementById('editScholar_' + editingUserId);
+          const schDisplay = document.getElementById('editScholarshipDisplay_' + editingUserId);
+          const netDisplay = document.getElementById('editNetDisplay_' + editingUserId);
+          const user = USERS.find(u => u.email === editingUserId);
+
+          if (tuitionInput && scholarToggle) {
+            const recalc = () => {
+              const raw = parseFloat(tuitionInput.value);
+              const t = isNaN(raw) || raw < 0 ? 0 : raw;
+              const isScholar = scholarToggle.classList.contains('active');
+              const s = isScholar ? t * 0.5 : 0;
+              const netBase = Math.max(0, t - s);
+              const paid = user ? (user.paid || 0) : 0;
+              const n = Math.max(0, netBase - paid);
+              if (schDisplay) schDisplay.textContent = peso(s);
+              if (netDisplay) netDisplay.textContent = peso(n);
+            };
+
+            tuitionInput.addEventListener('input', recalc);
+
+            scholarToggle.addEventListener('click', () => {
+              scholarToggle.classList.toggle('active');
+              const isScholar = scholarToggle.classList.contains('active');
+              scholarToggle.querySelector('span:last-child').textContent = isScholar ? 'Yes' : 'No';
+              recalc();
+            });
+
+            recalc();
+          }
+        }
+      }
+
+      // ========== MANAGEMENT TABS ==========
+      mgmtTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.mgmt;
+          mgmtTabs.forEach(t => t.classList.toggle('active', t === tab));
+          mgmtAccounts.classList.toggle('active', target === 'accounts');
+          mgmtPayments.classList.toggle('active', target === 'payments');
+        });
+      });
+
+      if (refreshAccounts) {
+        refreshAccounts.addEventListener('click', (e) => {
+          e.preventDefault();
+          editingUserId = null;
+          updateFinanceDashboard();
+          showToast('Accounts refreshed');
+        });
+      }
+
+      // ========== PAYMENT MODAL ==========
+      studentPayBtn.addEventListener('click', () => {
+        if (!currentUser || currentUser.role !== 'student') return;
+        openPaymentModal();
+      });
+
+      function openPaymentModal() {
+        const user = currentUser;
+        const outstanding = getOutstanding(user);
+
+        modalTuition.textContent = peso(user.tuition || 0);
+        modalScholarship.textContent = peso(user.scholarship || 0);
+        modalPaid.textContent = peso(user.paid || 0);
+        modalOutstanding.textContent = peso(outstanding);
+
+        modalMethod = user.paymentMethod || null;
+        methodGrid.querySelectorAll('.method-option').forEach(o => {
+          o.classList.toggle('selected', o.dataset.method === modalMethod);
+        });
+        updateMethodDetail();
+        payAmount.value = '';
+        modalError.classList.remove('show');
+
+        buildQuickAmounts(outstanding);
+
+        paymentModal.classList.add('show');
+      }
+
+      function buildQuickAmounts(outstanding) {
+        quickAmounts.innerHTML = '';
+        if (outstanding <= 0) return;
+
+        const options = [];
+        options.push({ label: 'Full balance', value: outstanding });
+        if (outstanding > 1) {
+          options.push({ label: '50%', value: Math.round(outstanding * 0.5 * 100) / 100 });
+        }
+        if (outstanding > 1) {
+          options.push({ label: '25%', value: Math.round(outstanding * 0.25 * 100) / 100 });
+        }
+        [1000, 5000, 10000].forEach(v => {
+          if (v < outstanding) options.push({ label: peso(v), value: v });
+        });
+
+        options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'quick-amount';
+          btn.type = 'button';
+          btn.textContent = opt.label;
+          btn.addEventListener('click', () => {
+            payAmount.value = opt.value.toFixed(2);
+          });
+          quickAmounts.appendChild(btn);
+        });
+      }
+
+      function updateMethodDetail() {
+        if (!modalMethod) {
+          methodDetail.classList.remove('show');
+          methodDetail.textContent = '';
+          return;
+        }
+        methodDetail.classList.add('show');
+        if (modalMethod === 'Online Bank') {
+          methodDetail.innerHTML = '<i class="fas fa-university" style="color: #2a6df4; margin-right: 6px;"></i> You will be redirected to your bank\'s secure portal. An <strong>Online Receipt</strong> will be issued after payment.';
+        } else if (modalMethod === 'Card') {
+          methodDetail.innerHTML = '<i class="fas fa-credit-card" style="color: #2a6df4; margin-right: 6px;"></i> Enter your card details on the next screen. An <strong>Online Receipt</strong> will be issued after payment.';
+        } else if (modalMethod === 'Cash') {
+          methodDetail.innerHTML = '<i class="fas fa-money-bill-wave" style="color: #2a6df4; margin-right: 6px;"></i> Pay in person at the Finance Office. An <strong>Official Receipt</strong> will be issued by the cashier.';
+        }
+      }
+
+      methodGrid.querySelectorAll('.method-option').forEach(option => {
+        option.addEventListener('click', () => {
+          modalMethod = option.dataset.method;
+          methodGrid.querySelectorAll('.method-option').forEach(o => o.classList.remove('selected'));
+          option.classList.add('selected');
+          updateMethodDetail();
+        });
+      });
+
+      modalClose.addEventListener('click', closePaymentModal);
+      paymentModal.addEventListener('click', (e) => {
+        if (e.target === paymentModal) closePaymentModal();
+      });
+
+      function closePaymentModal() {
+        paymentModal.classList.remove('show');
+        modalError.classList.remove('show');
+      }
+
+      // ========== CONFIRM PAYMENT ==========
+      confirmPayBtn.addEventListener('click', () => {
+        modalError.classList.remove('show');
+
+        if (!modalMethod) {
+          modalErrorMsg.textContent = 'Please select a payment method.';
+          modalError.classList.add('show');
+          return;
+        }
+
+        const rawAmount = parseFloat(payAmount.value);
+        if (isNaN(rawAmount) || rawAmount <= 0) {
+          modalErrorMsg.textContent = 'Please enter a valid payment amount.';
+          modalError.classList.add('show');
+          return;
+        }
+
+        const user = currentUser;
+        const outstanding = getOutstanding(user);
+        const amount = Math.min(rawAmount, outstanding);
+
+        if (amount <= 0) {
+          modalErrorMsg.textContent = 'No outstanding balance to pay.';
+          modalError.classList.add('show');
+          return;
+        }
+
+        const isCash = modalMethod === 'Cash';
+        const receiptType = isCash ? 'official' : 'online';
+        const receiptNo = isCash ? generateOfficialReceiptNo() : generateOnlineReceiptNo();
+
+        user.paid = (user.paid || 0) + amount;
+        user.paymentMethod = modalMethod;
+        if (!user.payments) user.payments = [];
+
+        const payment = {
+          id: 'PAY-' + Date.now(),
+          amount: amount,
+          method: modalMethod,
+          date: new Date().toISOString(),
+          receiptNo: receiptNo,
+          receiptType: receiptType
+        };
+
+        user.payments.push(payment);
+
+        closePaymentModal();
+        updateStudentDashboard(user);
+        openReceipt(user, payment);
+        showToast(`Payment successful: ${peso(amount)} via ${modalMethod}`);
+      });
+
+      // ========== RECEIPT MODAL ==========
+      function openReceipt(user, payment) {
+        const isOfficial = payment.receiptType === 'official';
+        const outstanding = getOutstanding(user);
+
+        const methodIcon = payment.method === 'Card' ? 'fa-credit-card'
+          : payment.method === 'Online Bank' ? 'fa-university'
+          : 'fa-money-bill-wave';
+
+        const title = isOfficial ? 'Official Receipt' : 'Online Receipt';
+        const badgeClass = isOfficial ? 'official' : 'online';
+        const badgeIcon = isOfficial ? 'fa-file-invoice' : 'fa-receipt';
+        const iconClass = isOfficial ? 'official' : 'online';
+        const iconFa = isOfficial ? 'fa-file-invoice-dollar' : 'fa-receipt';
+
+        const footerNote = isOfficial
+          ? `<div class="receipt-footer-note official">
+               <i class="fas fa-info-circle"></i>
+               <div>This is an <strong>Official Receipt (OR)</strong> issued by the Finance Office for cash payments. Please keep this receipt for your records. Present it for any verification or refund concerns.</div>
+             </div>`
+          : `<div class="receipt-footer-note online">
+               <i class="fas fa-shield-alt"></i>
+               <div>This is an <strong>Online Receipt</strong> generated after a successful online transaction. A digital copy has been sent to your registered email. No physical signature is required.</div>
+             </div>`;
+
+        const cashierLine = isOfficial
+          ? `<div class="receipt-cashier-line">
+               <span>Cashier on duty</span>
+               <span>J. Santos · Finance Office</span>
+             </div>`
+          : '';
+
+        const refLabel = isOfficial ? 'OR Number' : 'Transaction ID';
+        const refNo = payment.receiptNo || '—';
+
+        receiptModalContent.innerHTML = `
+          <div class="receipt-top">
+            <div class="receipt-icon-wrap ${iconClass}">
+              <i class="fas ${iconFa}"></i>
+            </div>
+            <div class="receipt-title">${title}</div>
+            <div class="receipt-subtitle">EduFinance · Payment confirmation</div>
+            <div class="receipt-type-badge ${badgeClass}">
+              <i class="fas ${badgeIcon}"></i>
+              ${isOfficial ? 'Official Receipt' : 'Online Receipt'}
+            </div>
+          </div>
+
+          <div class="receipt-paper ${isOfficial ? 'official' : ''}">
+            <div class="receipt-ref">
+              <span class="receipt-ref-label">${refLabel}</span>
+              <span class="receipt-ref-value">${refNo}</span>
+            </div>
+
+            <div class="receipt-row">
+              <span>Student</span>
+              <span>${escapeHtml(user.name)}</span>
+            </div>
+            <div class="receipt-row">
+              <span>Student ID</span>
+              <span>${escapeHtml(user.studentId || '—')}</span>
+            </div>
+            <div class="receipt-row">
+              <span>Payment date</span>
+              <span>${formatDateTime(payment.date)}</span>
+            </div>
+            <div class="receipt-row">
+              <span>Payment method</span>
+              <span><i class="fas ${methodIcon}" style="color: #2a6df4; margin-right: 5px;"></i>${payment.method}</span>
+            </div>
+
+            <div class="receipt-row amount">
+              <span>Amount paid</span>
+              <span>${peso(payment.amount)}</span>
+            </div>
+
+            <div class="receipt-balance">
+              <span>Remaining balance</span>
+              <span>${peso(outstanding)}</span>
+            </div>
+
+            ${cashierLine}
+          </div>
+
+          ${footerNote}
+
+          <div class="receipt-actions">
+            <button class="receipt-btn-print" id="printReceiptBtn">
+              <i class="fas fa-print"></i> Print receipt
+            </button>
+            <button class="receipt-btn-close" id="closeReceiptBtn">
+              <i class="fas fa-times"></i> Close
+            </button>
+          </div>
+        `;
+
+        receiptModal.classList.add('show');
+
+        document.getElementById('closeReceiptBtn').addEventListener('click', closeReceipt);
+        document.getElementById('printReceiptBtn').addEventListener('click', () => {
+          startPrintFlow(isOfficial);
+        });
+      }
+
+      function closeReceipt() {
+        receiptModal.classList.remove('show');
+      }
+
+      receiptModal.addEventListener('click', (e) => {
+        if (e.target === receiptModal) closeReceipt();
+      });
+
+      // ========== PRINT FLOW ==========
+      function startPrintFlow(isOfficial) {
+        const printBtn = document.getElementById('printReceiptBtn');
+        if (printBtn) {
+          printBtn.disabled = true;
+          printBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Printing...';
+        }
+
+        // Step 1: "Please wait..."
+        printCard.innerHTML = `
+          <div class="print-spinner"></div>
+          <div class="print-title">Please wait...</div>
+          <div class="print-message">Preparing your ${isOfficial ? 'Official' : 'Online'} Receipt for printing. This will only take a moment.</div>
+        `;
+        printOverlay.classList.add('show');
+
+        // Step 2: After a short delay, show "Done!" message
+        setTimeout(() => {
+          printCard.innerHTML = `
+            <div class="print-icon-success">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="print-title">Done!</div>
+            <div class="print-message">Please get your receipt. Thank you!</div>
+            <button class="print-close-btn show" id="printCloseBtn">
+              <i class="fas fa-thumbs-up"></i> Got it
+            </button>
+          `;
+
+          const printCloseBtn = document.getElementById('printCloseBtn');
+          printCloseBtn.addEventListener('click', () => {
+            printOverlay.classList.remove('show');
+            // re-enable print button
+            if (printBtn) {
+              printBtn.disabled = false;
+              printBtn.innerHTML = '<i class="fas fa-print"></i> Print receipt';
+            }
+          });
+        }, 1800);
+      }
+
+      // ========== LOGOUT ==========
+      logoutBtn.addEventListener('click', () => {
+        appWrapper.style.display = 'none';
+        authScreen.style.display = 'flex';
+        currentUser = null;
+        editingUserId = null;
+
+        document.querySelector('.auth-tab[data-tab="login"]').click();
+
+        loginEmail.value = 'student@edu.com';
+        loginPassword.value = 'student123';
+        loginSelectedRole = 'student';
+        loginRoleSelector.querySelectorAll('.role-option').forEach(o => {
+          o.classList.toggle('selected', o.dataset.role === 'student');
+        });
+        loginError.style.display = 'none';
+        loginSuccess.style.display = 'none';
+
+        switchDashboard('student');
+      });
+
+      // ========== INITIAL STATE ==========
+      authScreen.style.display = 'flex';
+      appWrapper.style.display = 'none';
+      loginError.style.display = 'none';
+      loginSuccess.style.display = 'none';
+      signupError.style.display = 'none';
+      signupSuccess.style.display = 'none';
+      signupStudentNote.style.display = 'flex';
+      loginEmail.value = 'student@edu.com';
+      loginPassword.value = 'student123';
+    })();
+  </script>
+</body>
+</html>
